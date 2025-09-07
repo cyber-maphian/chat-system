@@ -26,6 +26,11 @@ with allmsg:
         st.write(open_allmsg.read())
 
     st.button('New MSG.',icon="🔃")
+    clear_ = st.button("clear all msg",key="clear_all_msg")
+    if clear_:
+         clear_ = open('data/allmsg.txt','w')
+         clear_.write('')
+         clear_.close()
 
 with chat:
     id = st.radio("who are you",options=['hassana','sunday'])
