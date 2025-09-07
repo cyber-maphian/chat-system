@@ -1,1 +1,1 @@
-i build this simple chat system for me and my best frient
+A simple 2 person chat system
