@@ -145,7 +145,7 @@ with chat:
 with login:
     st.write("Login")
     with st.form("login"):
-        code = st.text_input("Passcode ").lower()
+        code = st.text_input("Passcode ",type="password").lower()
         hash = hashlib.sha256(code.encode()).hexdigest()
         if st.form_submit_button("Login"):
             if hash == "e233f4339a124c65f9d36b97010644c7e1037c93b3e34d254d179a069eb0dac2":
