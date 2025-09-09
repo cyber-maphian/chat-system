@@ -2,10 +2,11 @@ import streamlit as st
 import time
 from streamlit_autorefresh import  st_autorefresh
 import hashlib
+import os
 
 st.set_page_config(
     page_icon="👨‍💻",
-    page_title="loonChat",
+    page_title="2chat",
     initial_sidebar_state="expanded"
 )
 #disable loader
@@ -38,6 +39,10 @@ with chat:
         with st.container(border=10):
             open_allmsg = open('data/allmsg.txt')
             st.write(open_allmsg.read())
+            #read image
+            with open('data/image.bin','rb') as f:
+                st.image(f.read())
+                f.close()
             
         #logout and clear buttons
         with st.expander("Actions"):
@@ -48,9 +53,11 @@ with chat:
             with col1:
                 clear_ = st.button("clear all msg",key="clear_all_msg",icon="🧹")
                 if clear_:
+                    #clear image
                     clear_ = open('data/allmsg.txt','w')
                     clear_.write('')
                     clear_.close()
+                    #clear image
         
         #send message
         with st.container(border=True):
@@ -131,6 +138,23 @@ with chat:
                     with st.chat_message('assistant',avatar='👦🏼'):
                         reader = open('data/user2.txt','r')
                         st.write(reader.read())
+        #upload image
+        with st.expander("Upload Image"):
+            #collect and save image in a file
+            file = st.file_uploader("upload image.",type=['jpg','png','jpeg','web'])
+            if file:
+                with open('data/image.bin','wb') as f:
+                    f.write(file.read())
+                st.success("Image saved successfully!")
+        #live pic image
+        with st.expander("Live pic"):
+            #collect and save image in a file
+            live_pic = st.camera_input("Take live pic.",key="live_pic")
+            if live_pic:
+                with open('data/image.bin','wb') as f:
+                    f.write(live_pic.read())
+                st.success("Image saved successfully!")
+        #every other thing can be done here                
     else:
         #user 1 offline
         user1offline = open("data/user1online.txt",'w')
