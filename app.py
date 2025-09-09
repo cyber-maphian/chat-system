@@ -61,7 +61,7 @@ with chat:
         
         #send message
         with st.container(border=True):
-            id = st.radio("who are you",options=['hassana','sunday'])
+            id = st.radio("who are you",options=['None','hassana','sunday'])
             msg = st.chat_input('say hi')
             #read/write user online or offline
             if id == "sunday":
@@ -84,7 +84,7 @@ with chat:
                 st.write(user2online.read())
                 #user2online.close()
             else:
-                st.error("invalid user",icon="😡")
+                st.error("invalid user, please select a valid username",icon="😡")
             #send a message
             if msg:
                 if id == 'sunday':
@@ -147,13 +147,13 @@ with chat:
                     f.write(file.read())
                 st.success("Image saved successfully!")
         #live pic image
-        with st.expander("Live pic"):
+        #with st.expander("Live pic"):
             #collect and save image in a file
-            live_pic = st.camera_input("Take live pic.",key="live_pic")
-            if live_pic:
-                with open('data/image.bin','wb') as f:
-                    f.write(live_pic.read())
-                st.success("Image saved successfully!")
+            #live_pic = st.camera_input("Take live pic.",key="live_pic")
+            #if live_pic:
+                #with open('data/image.bin','wb') as f:
+                    #f.write(live_pic.read())
+                #st.success("Image saved successfully!")
         #every other thing can be done here                
     else:
         #user 1 offline
@@ -177,3 +177,4 @@ with login:
                 st.session_state.val = True
             else:
                 st.error("your login attempt failed.",icon="😡")
+
